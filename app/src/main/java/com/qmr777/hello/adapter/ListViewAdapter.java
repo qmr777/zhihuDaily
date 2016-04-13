@@ -15,6 +15,7 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
 import com.qmr777.hello.R;
 import com.qmr777.hello.model.TopStoriesModel;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -22,15 +23,17 @@ import java.util.List;
  */
 public class ListViewAdapter extends ArrayAdapter<TopStoriesModel.StoriesBean> {
     int resourceID;
+    HashMap<Integer,Bitmap> map = null;
 
     public ListViewAdapter(Context context, int resource, List<TopStoriesModel.StoriesBean> objects) {
 
         super(context, resource, objects);
         resourceID = resource;
+        map = new HashMap<>();
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         TopStoriesModel.StoriesBean storiesBean = getItem(position);
         final ViewHolder viewHolder;
         View view;
@@ -48,13 +51,20 @@ public class ListViewAdapter extends ArrayAdapter<TopStoriesModel.StoriesBean> {
 
         viewHolder.textView.setText(storiesBean.getTitle());
         //viewHolder.imageView.setBackground(new BitmapDrawable(Bitmap.createBitmap()));
-        ImageLoader.getInstance().loadImage(storiesBean.getImages().get(0),new SimpleImageLoadingListener(){
-            @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                super.onLoadingComplete(imageUri, view, loadedImage);
-                viewHolder.imageView.setBackground(new BitmapDrawable(loadedImage));
-            }
-        });
+        if(map.get(position)==null){
+            ImageLoader.getInstance().loadImage(storiesBean.getImages().get(0),new SimpleImageLoadingListener(){
+                @Override
+                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    super.onLoadingComplete(imageUri, view, loadedImage);
+                    viewHolder.imageView.setBackground(new BitmapDrawable(loadedImage));
+                    map.put(position,loadedImage);
+                }
+            });
+        }
+        else {
+            viewHolder.imageView.setBackground(new BitmapDrawable(map.get(position)));
+        }
+
 
         //return super.getView(position, convertView, parent);
         return view;

@@ -2,6 +2,7 @@ package com.qmr777.hello.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,6 +35,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.jar.Manifest;
 
 public class MainActivity extends AppCompatActivity
@@ -47,7 +51,6 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar;
 
     String date;
-
 
     Handler mhandler = new Handler(){
         @Override
