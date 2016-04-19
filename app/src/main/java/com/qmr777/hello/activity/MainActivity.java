@@ -100,8 +100,6 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(MainActivity.this,"fab",Toast.LENGTH_SHORT).show();
-                //Snackbar.make(coordinatorLayout,"hahahah",Snackbar.LENGTH_SHORT).show();
                 startActivityForResult(new Intent(MainActivity.this,GetPreData.class),0);
 
             }
@@ -122,8 +120,6 @@ public class MainActivity extends AppCompatActivity
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this,
-                        model.getStories().get(position).getId()+"",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, NewsActivity.class);
                 intent.putExtra("id",model.getStories().get(position).getId()+"");
                 intent.putExtra("title",model.getStories().get(position).getTitle());

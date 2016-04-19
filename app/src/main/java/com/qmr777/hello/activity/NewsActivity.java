@@ -1,5 +1,6 @@
 package com.qmr777.hello.activity;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qmr777.hello.R;
 import com.qmr777.hello.task.GetNewsTask;
@@ -41,6 +43,10 @@ public class NewsActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case android.R.id.home:
                 finish();
+                break;
+            case ActionBar.DISPLAY_HOME_AS_UP:
+                finish();
+                Toast.makeText(this,"hello",Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
